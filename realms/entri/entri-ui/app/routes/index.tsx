@@ -7,7 +7,6 @@ import { ApplicationHead } from "../variant/ApplicationHead.js";
 export default function Home(_c: Context) {
 	return (
 		<AppBody header={false}>
-			(
 			<main className={clsx("hero", "pt-2", "pb-12", "min-h-36")}>
 				<article
 					className={clsx(
@@ -51,7 +50,6 @@ export default function Home(_c: Context) {
 					<OidcUserLoginCard />
 				</article>
 			</main>
-			)
 		</AppBody>
 	);
 }

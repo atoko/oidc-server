@@ -3,6 +3,7 @@ import type { CSSProperties } from "hono/jsx";
 import { jsxRenderer } from "hono/jsx-renderer";
 import { Link, Script } from "honox/server";
 import { ApplicationHead } from "../variant/ApplicationHead.js";
+import { envsubst } from "@levicape/spork/server/EnvSubst";
 
 const foafStyle: CSSProperties = {
 	display: "none",
@@ -31,7 +32,33 @@ export default jsxRenderer(({ children }) => {
 				<meta charSet="UTF-8" />
 				<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 				<link rel="icon" href={"/favicon.ico"} type="image/png" />
-				<script type="module" src="/_window/oidc.js" />
+				{import.meta.env.PROD ? (
+					<script type={"module"} src={"/_window/oidc.js"} />
+				) : (
+					<script
+						type={"text/javascript"}
+						// biome-ignore lint/security/noDangerouslySetInnerHtml:
+						dangerouslySetInnerHTML={{
+							__html: envsubst(
+								`window["--oidc-debug"] = true; window["~oidc"] = ${JSON.stringify(
+									{
+										OAUTH_PUBLIC_OIDC_AUTHORITY: "$OAUTH_PUBLIC_OIDC_AUTHORITY",
+										OAUTH_PUBLIC_OIDC_CLIENT_ID: "$OAUTH_PUBLIC_OIDC_CLIENT_ID",
+										OAUTH_PUBLIC_OIDC_SCOPE: "$OAUTH_PUBLIC_OIDC_SCOPE",
+										OAUTH_PUBLIC_OIDC_RESPONSE_TYPE:
+											"$OAUTH_PUBLIC_OIDC_RESPONSE_TYPE",
+										OAUTH_PUBLIC_OIDC_REDIRECT_URI:
+											"$OAUTH_PUBLIC_OIDC_REDIRECT_URI",
+										OAUTH_PUBLIC_OIDC_POST_LOGOUT_REDIRECT_URI:
+											"$OAUTH_PUBLIC_OIDC_POST_LOGOUT_REDIRECT_URI",
+										OAUTH_PUBLIC_OIDC_SILENT_REDIRECT_URI:
+											"$OAUTH_PUBLIC_OIDC_SILENT_REDIRECT_URI",
+									},
+								)};`,
+							),
+						}}
+					/>
+				)}
 				<Script src="/app/client.ts" />
 				<Link href="/app/style.css" rel="stylesheet" />
 			</head>

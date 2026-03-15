@@ -55,7 +55,7 @@ const LoginForm: FC<{ query: AuthorizeQueryParams }> = ({ query }) => {
 		[usernameRef, passwordRef],
 	);
 
-	const url = $client["~"].Hall.Gate.Login.Session.$url().toString();
+	const url = $client["~"].Hall.Gate.Login.Session.Token.$url().toString();
 	const withoutError = { ...query };
 
 	// biome-ignore lint/performance/noDelete:

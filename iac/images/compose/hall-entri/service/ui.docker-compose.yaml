@@ -10,6 +10,13 @@ services:
       PROJECT_PATH: ./realms/entri/entri-ui
       PROJECT_COMMAND: serverwww:dev
       PORT: $ENTRI_UI
+      OAUTH_PUBLIC_OIDC_AUTHORITY: "https://${GATE_DOMAIN}.${ROOT_DOMAIN}"
+      OAUTH_PUBLIC_OIDC_RESPONSE_TYPE: "code"
+      OAUTH_PUBLIC_OIDC_SCOPE: "openid"
+      OAUTH_PUBLIC_OIDC_CLIENT_ID: $COMPOSE_PROJECT_NAME
+      OAUTH_PUBLIC_OIDC_REDIRECT_URI: "https://${CLIENT_DOMAIN}.${ROOT_DOMAIN}/;oidc/callback/"
+      OAUTH_PUBLIC_OIDC_POST_LOGOUT_REDIRECT_URI: "https://${CLIENT_DOMAIN}.${ROOT_DOMAIN}/;oidc/logout/"
+      OAUTH_PUBLIC_OIDC_SILENT_REDIRECT_URI: "https://${CLIENT_DOMAIN}.${ROOT_DOMAIN}/;oidc/renew/"      
     volumes: &workspace_volumes
       - ../../../../..:/workspace
     ports:

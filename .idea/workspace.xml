@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="4806ccb2-13c4-4ad2-b1bd-bf2a32186117" name="Changes" comment="- Verify redirect_uri in Anonymous Registration handler&#10;- Rename Atlas to Polly">
+      <change beforePath="$PROJECT_DIR$/realms/gate/gate-io/src/app/qureau/repository/users/user/QureauUserRow.Token.mts" beforeDir="false" afterPath="$PROJECT_DIR$/realms/gate/gate-io/src/app/qureau/repository/users/user/QureauUserRow.Token.mts" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;atoko&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/levicape/fluffy-enigma.git&quot;,
+    &quot;accountId&quot;: &quot;25bfd12a-d256-4daa-adf4-00f3db815fa9&quot;
+  }
+}</component>
+  <component name="KubernetesApiPersistence">{}</component>
+  <component name="KubernetesApiProvider">{
+  &quot;isMigrated&quot;: true
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2zWtKZbXRPotApM3qiaei20cJjo" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Docker.hall-entri/docker-compose.yaml: Compose Deployment.executor&quot;: &quot;Run&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;atoko/feat/gate/0&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.dx:image.executor&quot;: &quot;Run&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/realms/entri/entri-io/node_modules/typescript/lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;dev.nx.console.project_details_files&quot;: [
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/iac/development/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/protocols/qureau/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/realms/entri/entri-io/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/realms/entri/entri-ui/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/realms/gate/client-ui/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/realms/gate/gate-io/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/realms/gate/gate-ui/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/schema/qureau/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/iac/bootstrap/llrt/project.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/iac/bootstrap/llrt/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/iac/development/osx-fedora/project.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/iac/development/osx-fedora/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/iac/images/application/project.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/iac/images/application/package.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/iac/images/project.json&quot;,
+      &quot;/Users/rz-tunes-gotonull/Source/fluffy-enigma/iac/images/package.json&quot;
+    ]
+  }
+}</component>
+  <component name="RunManager" selected="Docker.hall-entri/docker-compose.yaml: Compose Deployment">
+    <configuration default="true" type="docker-deploy" factoryName="docker-compose.yml" temporary="true">
+      <deployment type="docker-compose.yml">
+        <settings />
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="hall-entri/docker-compose.yaml: Compose Deployment" type="docker-deploy" factoryName="docker-compose.yml" temporary="true" server-name="Docker">
+      <deployment type="docker-compose.yml">
+        <settings>
+          <option name="sourceFilePath" value="iac/images/compose/hall-entri/docker-compose.yaml" />
+        </settings>
+      </deployment>
+      <method v="2" />
+    </configuration>
+    <configuration name="dx:image" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dx:image" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Docker.hall-entri/docker-compose.yaml: Compose Deployment" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-b26f3e71634d-JavaScript-WS-251.26094.131" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4806ccb2-13c4-4ad2-b1bd-bf2a32186117" name="Changes" comment="" />
+      <created>1751858593803</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1751858593803</updated>
+      <workItem from="1751858595224" duration="1285000" />
+      <workItem from="1751890752283" duration="659000" />
+      <workItem from="1751896385535" duration="10000" />
+      <workItem from="1751898242328" duration="613000" />
+      <workItem from="1751909768259" duration="622000" />
+      <workItem from="1752130773711" duration="954000" />
+      <workItem from="1752152967409" duration="597000" />
+      <workItem from="1752171598730" duration="845000" />
+      <workItem from="1752184902095" duration="2000" />
+      <workItem from="1754285090213" duration="4921000" />
+      <workItem from="1754345103199" duration="3951000" />
+      <workItem from="1754547784323" duration="1210000" />
+      <workItem from="1754711564771" duration="598000" />
+      <workItem from="1754787422278" duration="136000" />
+      <workItem from="1754804168473" duration="10000" />
+      <workItem from="1754886131596" duration="401000" />
+      <workItem from="1755125057346" duration="2271000" />
+      <workItem from="1755623277410" duration="5000" />
+      <workItem from="1755749976639" duration="8000" />
+    </task>
+    <task id="LOCAL-00001" summary="- Verify redirect_uri in Anonymous Registration handler&#10;- Rename Atlas to Polly">
+      <option name="closed" value="true" />
+      <created>1755126091700</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1755126091700</updated>
+    </task>
+    <task id="LOCAL-00002" summary="- Verify redirect_uri in Anonymous Registration handler&#10;- Rename Atlas to Polly">
+      <option name="closed" value="true" />
+      <created>1755126114174</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1755126114174</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- Verify redirect_uri in Anonymous Registration handler&#10;- Rename Atlas to Polly" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Verify redirect_uri in Anonymous Registration handler&#10;- Rename Atlas to Polly" />
+  </component>
+</project>

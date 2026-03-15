@@ -25,6 +25,8 @@ declare global {
 					OAUTH_PUBLIC_OIDC_REDIRECT_URI: string;
 					OAUTH_PUBLIC_OIDC_POST_LOGOUT_REDIRECT_URI: string;
 					OAUTH_PUBLIC_OIDC_SILENT_REDIRECT_URI: string;
+					OAUTH_PUBLIC_OIDC_RESPONSE_TYPE: string;
+					OAUTH_PUBLIC_OIDC_SCOPE: string;
 			  }
 			| undefined;
 		"~oidc_usermanager":
@@ -66,6 +68,8 @@ const initializeOidcClient = () => {
 				OAUTH_PUBLIC_OIDC_REDIRECT_URI,
 				OAUTH_PUBLIC_OIDC_POST_LOGOUT_REDIRECT_URI,
 				OAUTH_PUBLIC_OIDC_SILENT_REDIRECT_URI,
+				OAUTH_PUBLIC_OIDC_RESPONSE_TYPE,
+				OAUTH_PUBLIC_OIDC_SCOPE
 			} = window["~oidc"];
 
 			const userManager = new UserManager({
@@ -74,8 +78,8 @@ const initializeOidcClient = () => {
 				redirect_uri: OAUTH_PUBLIC_OIDC_REDIRECT_URI,
 				post_logout_redirect_uri: OAUTH_PUBLIC_OIDC_POST_LOGOUT_REDIRECT_URI,
 				silent_redirect_uri: OAUTH_PUBLIC_OIDC_SILENT_REDIRECT_URI,
-				response_type: "code",
-				scope: "openid profile email",
+				response_type: OAUTH_PUBLIC_OIDC_RESPONSE_TYPE,
+				scope: OAUTH_PUBLIC_OIDC_SCOPE,
 				automaticSilentRenew: false,
 				accessTokenExpiringNotificationTimeInSeconds: 66,
 				stateStore: new WebStorageStateStore({

@@ -79,7 +79,7 @@ export type OauthEnvironment = {
 
 const {
 	OAUTH_IDP_LOGIN_PATH = "/oauth2/anonymous/",
-	OAUTH_IDP_ERROR_PATH = "/oauth2/error/",
+	OAUTH_IDP_ERROR_PATH = "/oauth2/warn/",
 }: OauthEnvironment = env;
 
 const factory = createFactory<
