@@ -6,47 +6,47 @@ include:
   - http.docker-compose.yaml
   - ui.docker-compose.yaml
 services:
-  atlas-root:
+  polly-root:
       image: $APPLICATION_HALL_IMAGE
       entrypoint: launcher
       command: |
         pnpm run -C realms/entri/entri-io polly
       environment:
         COMPOSE_PROJECT_NAME: $COMPOSE_PROJECT_NAME
-        ATLAS_CADDYFILE: /caddy/Caddyfile
-        ATLAS_CADDYFILE_DOMAIN: entri.hall.platform
-        ATLAS_CADDYFILE_REPLACE: true
+        POLLY_CADDYFILE: /caddy/Caddyfile
+        POLLY_CADDYFILE_DOMAIN: entri.hall.platform
+        POLLY_CADDYFILE_REPLACE: true
         ENTRI_HTTP_HOST: http:${ENTRI_HTTP}
         ENTRI_UI_HOST: ui:${ENTRI_UI}      
       volumes: &caddyfile_volumes
-          - ${HOME}/.cache/levicape/${COMPOSE_PROJECT_NAME}/atlas/caddy:/caddy      
-  atlas-gate:
+          - ${HOME}/.cache/levicape/${COMPOSE_PROJECT_NAME}/polly/caddy:/caddy      
+  polly-gate:
       image: $APPLICATION_HALL_IMAGE
       depends_on:
-        atlas-root:
+        polly-root:
           condition: service_completed_successfully      
       entrypoint: launcher
       command: |
-        pnpm run -C realms/gate/gate-io atlas
+        pnpm run -C realms/gate/gate-io polly
       environment:
         COMPOSE_PROJECT_NAME: $COMPOSE_PROJECT_NAME
-        ATLAS_CADDYFILE: /caddy/Caddyfile
-        ATLAS_CADDYFILE_DOMAIN: gate.hall.platform        
+        POLLY_CADDYFILE: /caddy/Caddyfile
+        POLLY_CADDYFILE_DOMAIN: gate.hall.platform        
         GATE_HTTP_HOST: gate-http:${GATE_HTTP}
         GATE_UI_HOST: gate-ui:${GATE_UI}
       volumes: *caddyfile_volumes
-  atlas-client:
+  polly-client:
       image: $APPLICATION_HALL_IMAGE
       depends_on:
-        atlas-gate:
+        polly-gate:
           condition: service_completed_successfully      
       entrypoint: launcher
       command: |
         node --experimental-strip-types ./realms/gate/client-ui/src/Polly.mts
       environment:
         COMPOSE_PROJECT_NAME: $COMPOSE_PROJECT_NAME 
-        ATLAS_CADDYFILE: /caddy/Caddyfile
-        ATLAS_CADDYFILE_DOMAIN: client.hall.platform        
+        POLLY_CADDYFILE: /caddy/Caddyfile
+        POLLY_CADDYFILE_DOMAIN: client.hall.platform        
         CLIENT_UI_HOST: client-ui:${CLIENT_UI}
       volumes: *caddyfile_volumes
 

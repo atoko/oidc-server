@@ -7,7 +7,7 @@ services:
   caddy:
     image: "caddy:2.9"
     depends_on:
-      atlas-client:
+      polly-client:
         condition: service_completed_successfully
     restart: unless-stopped
     cap_add:
@@ -15,6 +15,6 @@ services:
     ports:
       - 443:443
     volumes:
-      - ${HOME}/.cache/levicape/${COMPOSE_PROJECT_NAME}/atlas/caddy:/etc/caddy
+      - ${HOME}/.cache/levicape/${COMPOSE_PROJECT_NAME}/polly/caddy:/etc/caddy
       - caddy_data:/data
       - caddy_config:/config

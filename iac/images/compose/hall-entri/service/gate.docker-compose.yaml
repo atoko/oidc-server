@@ -22,9 +22,10 @@ services:
         condition: service_healthy
       pg-qureau:
         condition: service_completed_successfully          
-      atlas-client:
+      polly-client:
         condition: service_completed_successfully          
     environment:      
+      NODE_ENV: dev
       NODE_OPTIONS: $NODE_OPTIONS
       LOG_LEVEL: $LOG_LEVEL
       STRUCTURED_LOGGING: $STRUCTURED_LOGGING
