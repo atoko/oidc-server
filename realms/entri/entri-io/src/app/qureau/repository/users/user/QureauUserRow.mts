@@ -186,12 +186,7 @@ export class QureauUserRow<Pk extends string = QureauTableId>
 
 		try {
 			const user = User.decode(row.binpb);
-			console.log({
-				REMOVEME: {
-					user,
-					row: JSON.stringify(row),
-				},
-			});
+
 			return User.fromPartial({
 				...user,
 				id: `${userId}`,

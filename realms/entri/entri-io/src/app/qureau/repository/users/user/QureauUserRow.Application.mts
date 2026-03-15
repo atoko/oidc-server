@@ -196,13 +196,6 @@ export class QureauUserApplicationRow<Pk extends string = QureauTableId>
 		try {
 			const userregistration = UserRegistration.decode(row.binpb);
 
-			console.log({
-				REMOVEME: {
-					userregistration,
-					row: JSON.stringify(row),
-				},
-			});
-
 			return UserRegistration.fromPartial({
 				...userregistration,
 				applicationId: applicationId as QureauApplicationId,

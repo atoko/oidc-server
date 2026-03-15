@@ -164,12 +164,7 @@ export class QureauUserTokenRow<Pk extends string = QureauTableId>
 		// TODO: Confirm
 		try {
 			const refreshtoken = RefreshToken.decode(Uint8Array.from(row.binpb));
-			console.log({
-				REMOVEME: {
-					refreshtoken,
-					row: JSON.stringify(row),
-				},
-			});
+
 			return RefreshToken.fromPartial({
 				...refreshtoken,
 				applicationId: applicationId as QureauApplicationId,

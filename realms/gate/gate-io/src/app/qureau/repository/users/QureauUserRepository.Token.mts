@@ -41,12 +41,7 @@ export class QureauUserTokenRepository {
 	): Promise<QureauUserTokenRow | undefined> => {
 		const pk = userId;
 		const sk = QureauUserTokenRow.sk(applicationId, tokenId);
-		console.log({
-			QureauUserTokenRepository: {
-				pk,
-				sk,
-			},
-		});
+
 		return await this.tokens.getById(pk, sk);
 	};
 }
