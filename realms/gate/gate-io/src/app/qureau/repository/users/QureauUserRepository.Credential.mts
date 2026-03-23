@@ -1,42 +1,53 @@
-// import { ITable } from "$server/client/ITable";
-// import {
-//   ProfileKey,
-//   ProfileRow,
-// } from "$accounts/model/profile/table/ProfileRow";
-// import { ProfileNotFoundException } from "$accounts/model/exceptions/ProfileNotFoundException";
-// import { ProfileTable } from "./ProfileTable";
+import { scryptSync } from "node:crypto";
+import type { Credential } from "../../../../_protocols/qureau/tsnode/domain/credential/credential._._.js";
+import type { QureauRepositoryProps } from "./QureauUserRepository.mjs";
+import { QureauUserCredentialRow } from "./user/QureauUserRow.Credential.mjs";
 
-// export class ProfileCollectionRepository {
-//   constructor(private readonly storageClient: ITable<ProfileRow, ProfileKey>) {}
+export class QureauUserCredentialRepository {
+	constructor() {}
 
-//   async create(row: ProfileRow): Promise<ProfileRow> {
-//     await this.storageClient.post(row);
-//     return row;
-//   }
+	credentialRowForCredential = async (
+		credential: Credential,
+		props: QureauRepositoryProps,
+	): Promise<QureauUserCredentialRow> => {
+		const nowunix = Date.now();
+		const nowiso = new Date(nowunix).toISOString();
 
-//   async readById(profileId: string[]): Promise<ProfileRow[]> {
-//     const raw = await this.storageClient.getByMultiplePartitionIds(
-//       profileId,
-//       "#profile;" as ProfileKey["entity"],
-//     );
+		if (credential.userId === undefined) {
+			throw new Error("Credential must have a userId")
+		}
 
-//     if (raw === undefined || (Array.isArray(raw) && raw.length === 0)) {
-//       throw new ProfileNotFoundException();
-//     }
-//     return raw;
-//   }
+		const row = new QureauUserCredentialRow(
+			credential.userId,
+			credential,
+			nowiso,
+			props.domain.principal,
+			{
+				...props.domain.request,
+				resourceVersion: nowiso,
+			},
+			props.domain.scrypt,
+		);
 
-//   async update(row: ProfileRow): Promise<ProfileRow> {
-//     const updated = {
-//       ...row,
-//       lastUpdated: Date.now().toString(),
-//     };
+		return row;
+	};
 
-//     await this.storageClient.put(row.id, row.entity, updated);
-//     return updated;
-//   }
-// }
+	createPasswordForUser = async (
+		userId: string,
+		password: string,
+		props: QureauRepositoryProps,
+	): Promise<QureauUserCredentialRow> => {
+		const hashed = scryptSync(password, userId, 64);
+		const credential = {
+			userId: userId,
+			providerId: "password",
+			credential: hashed.toString('hex'),
+		};
+		const credentialrow = (await this.credentialRowForCredential(
+			credential,
+			props,
+		)) as QureauUserCredentialRow;
 
-// export const profileCollectionRepository = new ProfileCollectionRepository(
-//   ProfileTable,
-// );
+		return credentialrow;
+	};
+}

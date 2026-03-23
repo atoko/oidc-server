@@ -14,7 +14,6 @@
   },  
   "dependencies": {
     "@bufbuild/protobuf": "catalog:protobuf",
-    "@levicape/paloma": "catalog:",
     "effect": "catalog:effect",
     "ksuid": "catalog:id",
     "std-env": "catalog:runtime-env",

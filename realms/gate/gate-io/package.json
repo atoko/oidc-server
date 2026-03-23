@@ -21,7 +21,6 @@
   },
   "dependencies": {
     "@bufbuild/protobuf": "catalog:protobuf",
-    "@levicape/paloma": "catalog:",
     "@levicape/spork": "catalog:",
     "@levicape/spork-polly": "catalog:",
     "effect": "catalog:effect",

@@ -14,7 +14,7 @@ import {
 import { Qureau, version } from "../../Qureau.mjs";
 import { QQUsersError } from "../../service/QureauUser.mjs";
 import { qqZodError } from "../QureauBadRequestExceptionHandler.mjs";
-import { QureauRegistrationRegisterCommandZod } from "./QureauRegistrationCommand.mjs";
+import { QureauRegistrationPasswordRegisterCommandZod } from "./QureauRegistrationPasswordCommand.mjs";
 
 const registrationRegisterInfers = (
 	headers: Record<string, string | undefined>,
@@ -29,29 +29,14 @@ const registrationRegisterInfers = (
 	};
 };
 
-export const QureauRegistrationHandler = Qureau().createHandlers(
+export const QureauRegistrationPasswordHandler = Qureau().createHandlers(
 	HonoGuardAuthentication(async ({ principal }) => {
-		return principal.$case !== "anonymous";
+		return principal.$case === "anonymous";
 	}),
 	async (c) => {
-		// TODO: Http/Observability/Headers proto
-		// const headerNonce = request.header("X-Nonce");
 		const { body, status, json } = c;
 		const { success, error, data } =
-			await QureauRegistrationRegisterCommandZod.safeParseAsync(body);
-		// const requestLoggingEnabled = isRequestLoggingEnabled();
-		// requestLoggingEnabled &&
-		// 	Logger.request({
-		// 		QureauRegistrationHandler: {
-		// 			request: {
-		// 				body: process.env.NODE_ENV === "production" ? data : body,
-		// 				headers,
-		// 				error: requestLoggingEnabled
-		// 					? JSON.stringify(error?.errors ?? {})
-		// 					: error?.errors,
-		// 			},
-		// 		},
-		// 	});
+			await QureauRegistrationPasswordRegisterCommandZod.safeParseAsync(await c.req.json());
 
 		if (error || data === undefined) {
 			return json(
@@ -81,15 +66,6 @@ export const QureauRegistrationHandler = Qureau().createHandlers(
 				StatusCodes.BAD_REQUEST,
 			);
 		}
-		// if (headerNonce !== body.ext.nonce) {
-		//   throw new QQUsersError(
-		//     StatusCodes.EXPECTATION_FAILED,
-		//     {
-		//       code: "QQ_BAD_REQUEST",
-		//       reason: "QQ_NONCE_MISMATCH",
-		//     },
-		//   );
-		// }
 
 		const register: RegistrationRegisterResponse =
 			await c.var.Registration.Register(

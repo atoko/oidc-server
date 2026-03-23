@@ -10,7 +10,6 @@
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:lint",
-    "@levicape/fourtwo": "catalog:",
     "@types/node": "catalog:types",
     "depcheck": "catalog:package",
     "nx": "catalog:project-nx",

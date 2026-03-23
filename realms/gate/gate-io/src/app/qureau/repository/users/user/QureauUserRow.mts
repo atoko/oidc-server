@@ -15,6 +15,7 @@ import {
 // } from "#protocols/qureau/tsnode/domain/scrypt/scrypt._._._.key";
 import type { QureauUsersApplicationEntity } from "./QureauUserRow.Application.mjs";
 import type { QureauUsersTokenEntity } from "./QureauUserRow.Token.mjs";
+import type { QureauUserCredentialEntity } from "./QureauUserRow.Credential.mjs";
 
 const RING_SIZE = 504;
 
@@ -26,7 +27,8 @@ export type QureauUserEntity = `&User!;`;
 export type QureauUsersEntity =
 	| QureauUserEntity
 	| QureauUsersTokenEntity
-	| QureauUsersApplicationEntity;
+	| QureauUsersApplicationEntity
+	| QureauUserCredentialEntity;
 export type QureauUserKey = {
 	pk: QureauTableId;
 	sk: QureauUsersEntity;
@@ -83,8 +85,8 @@ export class QureauUserRow<Pk extends string = QureauTableId>
 		this.pk = `qureau@${userId}` as Pk;
 		this.sk = "&User!;";
 		this.gsis_pk___shard =
-			createHash("md5").update(userId).digest().readUInt32LE(0) % RING_SIZE;
-		this.gsip_pk___perimeter = (Math.random() * RING_SIZE ** 2) % RING_SIZE;
+			Math.round(createHash("md5").update(userId).digest().readUInt32LE(0) % RING_SIZE);
+		this.gsip_pk___perimeter = Math.round((Math.random() * RING_SIZE ** 2) % RING_SIZE);
 
 		const { username } = user;
 		// biome-ignore lint/style/noNonNullAssertion:

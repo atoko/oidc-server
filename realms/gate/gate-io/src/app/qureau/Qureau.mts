@@ -26,9 +26,11 @@ import {
 	qureauUsersByTokenId,
 	qureauUsersByUserRegistrationId,
 	qureauUsersByUsername,
+	qureauUsersCredentialsTable,
 	qureauUsersSearchIndex,
 	qureauUsersTable,
 } from "./repository/QureauUsersTable.mjs";
+import { QureauUserCredentialRepository } from "./repository/users/QureauUserRepository.Credential.mjs";
 import { QureauUserRegistrationRepository } from "./repository/users/QureauUserRepository.Registration.mjs";
 import { QureauUserTokenRepository } from "./repository/users/QureauUserRepository.Token.mjs";
 import { QureauUserRepository } from "./repository/users/QureauUserRepository.mjs";
@@ -72,7 +74,7 @@ export type OauthEnvironment = {
 	OAUTH_IDP_LOGIN_PATH?: string;
 	/**
 	 * Error redirect path from oauth2 endpoints. Required to be relative
-	 * @default `/oauth2/error/`
+	 * @default `/oauth2/warn/`
 	 */
 	OAUTH_IDP_ERROR_PATH?: string;
 };
@@ -107,12 +109,15 @@ const factory = createFactory<
 		);
 		const qureauUserTokenRepository: QureauUserTokenRepository =
 			new QureauUserTokenRepository(QureauUserTokensTable);
+		const qureauUserCredentialRepository: QureauUserCredentialRepository =
+			new QureauUserCredentialRepository();
 		const qureauUserRegistrationRepository: QureauUserRegistrationRepository =
 			new QureauUserRegistrationRepository(
 				ulidKeygen,
 				qureauUsersApplicationsTable,
 				qureauUserRepository,
 				qureauUserTokenRepository,
+				qureauUserCredentialRepository,
 			);
 
 		const qureauUserService: QureauUser = new QureauUser(qureauUserRepository);

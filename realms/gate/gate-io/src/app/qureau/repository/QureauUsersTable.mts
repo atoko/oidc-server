@@ -19,6 +19,7 @@ import {
 	type QureauUserKey,
 	QureauUserRow,
 } from "./users/user/QureauUserRow.mjs";
+import type { QureauUserCredentialRow } from "./users/user/QureauUserRow.Credential.mjs";
 
 const { users } = QureauContext.fromEnvironmentVariables();
 let usersTable: ITable<QureauUserRow, QureauUserKey> | undefined;
@@ -112,6 +113,11 @@ export const qureauUserTokensTable = qureauUsersTable as ITable<
 
 export const qureauUsersApplicationsTable = qureauUsersTable as ITable<
 	QureauUserApplicationRow,
+	QureauUserKey
+>;
+
+export const qureauUsersCredentialsTable = qureauUsersTable as unknown as ITable<
+	QureauUserCredentialRow,
 	QureauUserKey
 >;
 

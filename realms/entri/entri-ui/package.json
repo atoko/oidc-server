@@ -15,7 +15,6 @@
     "@base-ui-components/react": "catalog:web-components",
     "@hono/node-server": "catalog:hono",
     "@levicape/hall-entri-io": "workspace:",
-    "@levicape/paloma": "catalog:",
     "@levicape/spork": "catalog:",
     "@levicape/spork-polly": "catalog:",
     "clsx": "catalog:web-style",

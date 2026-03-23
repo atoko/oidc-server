@@ -13,6 +13,7 @@ import {
 import { QureauLoginHandler } from "./controller/login/QureauLoginHandler.mjs";
 import { QureauRegistrationAnonymousHandler } from "./controller/registrations/QureauRegistrationAnonymousHandler.mjs";
 import { QureauRegistrationHandler } from "./controller/registrations/QureauRegistrationHandler.mjs";
+import { QureauRegistrationPasswordHandler } from "./controller/registrations/QureauRegistrationPasswordHandler.mjs";
 import { QureauTokensRefreshFromRefreshHandler } from "./controller/tokens/QureauTokensRefreshFromRefreshHandler.mjs";
 import { QureauUsersPrincipalViewHandler } from "./controller/users/principal/QureauUsersPrincipalViewHandler.mjs";
 
@@ -50,7 +51,8 @@ export const QureauRouter = Qureau()
 	.post(QureauTokenEndpoint, ...QureauTokensRefreshFromRefreshHandler)
 	.post(QureauRevokeEndpoint, ...QureauLoginHandler)
 	.post(QureauUserinfoEndpoint, ...QureauUsersPrincipalViewHandler)
-	.post("Users/Registration", ...QureauRegistrationHandler);
+	.post("Users/Registration", ...QureauRegistrationHandler)
+	.post("Users/Registration/Password", ...QureauRegistrationPasswordHandler);
 
 export const QureauNotFound = Qureau().createHandlers(async (c) => {
 	return c.json(

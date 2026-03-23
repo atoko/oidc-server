@@ -1,4 +1,4 @@
-import type { KeygenSrand } from "@levicape/spork/server/security/IdKeygen";
+import { ulidKeygen, type KeygenSrand } from "@levicape/spork/server/security/IdKeygen";
 import { UnsecuredJWT } from "jose";
 import { ulid } from "ulidx";
 import {
@@ -46,7 +46,7 @@ export class QureauRegistration implements QureauRegistrationService {
 			nonce: ulid(),
 		};
 
-		const userId = request.request?.user?.id ?? this.keygen.srand();
+		const userId = request.request?.user?.id ?? ulidKeygen.ksort();
 		// TODO: RegistrationRegisterUserRequest -> User mapping
 		// Make sure enums are the same
 		const userProto = User.fromPartial({
@@ -116,6 +116,7 @@ export class QureauRegistration implements QureauRegistrationService {
 			{
 				applicationId: applicationId ?? "uwu",
 				user: userProto,
+				password: user?.password,
 				genAuthenticationToken: async () => {
 					return authentication;
 				},

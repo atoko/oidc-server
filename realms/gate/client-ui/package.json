@@ -15,7 +15,6 @@
   "dependencies": {
     "@base-ui-components/react": "catalog:web-components",
     "@hono/node-server": "catalog:hono",
-    "@levicape/paloma": "catalog:",
     "@levicape/spork": "catalog:",
     "@levicape/spork-polly": "catalog:",
     "clsx": "catalog:web-style",

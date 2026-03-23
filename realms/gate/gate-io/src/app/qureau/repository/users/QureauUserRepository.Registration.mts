@@ -2,7 +2,7 @@ import type { ITable } from "@levicape/spork/server/client/table/ITable";
 import type { KeygenKsort } from "@levicape/spork/server/security/IdKeygen";
 import type { RefreshToken } from "../../../../_protocols/qureau/tsnode/domain/token/token._._.js";
 import {
-	type User,
+	User,
 	UserContentStatus,
 } from "../../../../_protocols/qureau/tsnode/domain/user/user._._.js";
 import { UserRegistration } from "../../../../_protocols/qureau/tsnode/domain/user/user._._.registration._._.js";
@@ -11,18 +11,21 @@ import {
 	QQUserNameExistsError,
 	QQUsersError,
 } from "../../service/QureauUser.mjs";
+import type { QureauUserCredentialRepository } from "./QureauUserRepository.Credential.mjs";
 import type { QureauUserTokenRepository } from "./QureauUserRepository.Token.mjs";
 import type {
 	QureauRepositoryProps,
 	QureauUserRepository,
 } from "./QureauUserRepository.mjs";
 import { QureauUserApplicationRow } from "./user/QureauUserRow.Application.mjs";
+import type { QureauUserCredentialRow } from "./user/QureauUserRow.Credential.mjs";
 import type { QureauUserTokenRow } from "./user/QureauUserRow.Token.mjs";
 import type { QureauUserKey, QureauUserRow } from "./user/QureauUserRow.mjs";
 
 export type CreateUserAndRegisterProps = {
 	applicationId: string;
-	user: User & { id: string };
+	user: Partial<User>;
+	password?: string;
 	genAuthenticationToken: () => Promise<
 		(RefreshToken & { userId: string; id: string }) | undefined
 	>;
@@ -34,7 +37,7 @@ export type CreateUserAndRegisterResult = {
 		user: QureauUserRow;
 		registration: QureauUserApplicationRow;
 		tokens: QureauUserTokenRow[];
-		// credential?: QureauUserCredentialRow
+		credential?: QureauUserCredentialRow;
 	};
 	data: {
 		user: User;
@@ -49,16 +52,21 @@ export class QureauUserRegistrationRepository {
 		private readonly users: ITable<QureauUserApplicationRow, QureauUserKey>,
 		private readonly userRepository: QureauUserRepository,
 		private readonly userTokenRepository: QureauUserTokenRepository,
+		private readonly credentialRepository: QureauUserCredentialRepository,
 	) {}
 
 	registrationRowForUserRegistration = async (
-		user: User & { id: string },
+		user: User,
 		userRegistration: UserRegistration,
 		props: QureauRepositoryProps,
 	): Promise<QureauUserApplicationRow> => {
 		const { applicationId } = { applicationId: "uwu", ...userRegistration };
 		const nowunix = Date.now();
 		const nowiso = new Date(nowunix).toISOString();
+
+		if (user.id === undefined) {
+			throw new Error("User must have an id")
+		}
 
 		const row = new QureauUserApplicationRow(
 			applicationId as "uwu",
@@ -83,12 +91,19 @@ export class QureauUserRegistrationRepository {
 	): Promise<CreateUserAndRegisterResult> => {
 		const {
 			applicationId,
-			user,
+			password,
 			genAuthenticationToken: generateAuthenticationToken,
 			genRefreshToken: generateRefreshToken,
 		} = register;
+		const user = User.fromPartial({
+			...register.user,
+			id: props.domain.principal.principalId,
+		});
 		const userrow = QureauTableUsersEntity.toJSON(
-			await this.userRepository.userRowForUser(user, props),
+			await this.userRepository.userRowForUser({
+				...user,
+				id: user.id!,
+			}, props),
 		) as QureauUserRow;
 
 		const tokens = {
@@ -125,7 +140,11 @@ export class QureauUserRegistrationRepository {
 		});
 
 		const registrationrow = QureauTableUsersEntity.toJSON(
-			await this.registrationRowForUserRegistration(user, registration, props),
+			await this.registrationRowForUserRegistration(
+				user as User,
+				registration,
+				props,
+			),
 		) as QureauUserApplicationRow;
 		const tokenrows = [];
 		for (const token of Object.values(tokens)) {
@@ -142,10 +161,24 @@ export class QureauUserRegistrationRepository {
 			}
 		}
 
+		let credentialrow: QureauUserCredentialRow | undefined;
+		if (password) {
+			if (user.id === undefined) { 
+				throw new Error("User must have an id") 
+			};
+
+			credentialrow = await this.credentialRepository.createPasswordForUser(
+				user.id,
+				password,
+				props,
+			);
+		}
+
 		try {
 			await this.users.insert(userrow.pk, [
 				userrow,
 				registrationrow,
+				...(credentialrow ? [credentialrow] : []),
 				...(tokenrows ?? []),
 			]);
 		} catch (error) {
@@ -157,6 +190,7 @@ export class QureauUserRegistrationRepository {
 				user: userrow,
 				registration: registrationrow,
 				tokens: tokenrows,
+				credential: credentialrow,
 			},
 			data: {
 				user,

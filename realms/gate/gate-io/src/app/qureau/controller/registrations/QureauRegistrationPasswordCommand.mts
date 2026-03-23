@@ -1,10 +1,8 @@
 import { z } from "zod";
 
-const allowAnonymous = true; //ServerContext.fromEnvironmentVariables().users.ALLOW_ANONYMOUS_REGISTRATION;
+const allowAnonymous = false;
 
-// TODO: QureauContext
-
-export const QureauRegistrationRegisterCommandZod = z.object({
+export const QureauRegistrationPasswordRegisterCommandZod = z.object({
 	request: z
 		.object({
 			user: z
@@ -44,7 +42,7 @@ export const QureauRegistrationRegisterCommandZod = z.object({
 							},
 							// TODO: Is there a protocol somewhere in here for forms
 							{
-								error:
+								message:
 									"registration.register.request.user.password.uppercase_required",
 							},
 						)
@@ -53,7 +51,7 @@ export const QureauRegistrationRegisterCommandZod = z.object({
 								return /(?=.*[a-z])/.test(v);
 							},
 							{
-								error:
+								message:
 									"registration.register.request.user.password.lowercase_required",
 							},
 						)
@@ -62,7 +60,7 @@ export const QureauRegistrationRegisterCommandZod = z.object({
 								return /(?=.*[0-9])/.test(v);
 							},
 							{
-								error:
+								message:
 									"registration.register.request.user.password.number_required",
 							},
 						)
@@ -71,7 +69,7 @@ export const QureauRegistrationRegisterCommandZod = z.object({
 								return /(?=.*[^A-Za-z0-9])/.test(v);
 							},
 							{
-								error:
+								message:
 									"registration.register.request.user.password.symbol_required",
 							},
 						)
@@ -80,7 +78,7 @@ export const QureauRegistrationRegisterCommandZod = z.object({
 								return v.length >= 8;
 							},
 							{
-								error:
+								message:
 									"registration.register.request.user.password.length_required",
 							},
 						)
@@ -89,7 +87,7 @@ export const QureauRegistrationRegisterCommandZod = z.object({
 								return v.length <= 255;
 							},
 							{
-								error: "registration.register.request.user.password.length_max",
+								message: "registration.register.request.user.password.length_max",
 							},
 						),
 
@@ -115,7 +113,7 @@ export const QureauRegistrationRegisterCommandZod = z.object({
 						})
 						.optional(),
 				})
-				.optional(),
+				,
 			registration: z
 				.object({
 					applicationId: z
@@ -131,17 +129,7 @@ export const QureauRegistrationRegisterCommandZod = z.object({
 				}),
 			generateAuthenticationToken: z.boolean().default(true),
 		})
-		.default({
-			user: {
-				username: "anonymous",
-				password: "ABC123456!@#$%$",
-				passwordChangeRequired: false,
-			},
-			registration: {
-				applicationId: "yyzyxyy",
-			},
-			generateAuthenticationToken: true,
-		}),
+		,
 	ext: z.object({
 		nonce: z.string().min(4).max(255).default("TODO: sync with header"),
 	}),

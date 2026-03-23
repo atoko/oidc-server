@@ -14,11 +14,15 @@
   "dependencies": {
     "@base-ui-components/react": "catalog:web-components",
     "@hono/node-server": "catalog:hono",
+    "@hono/vite-build": "catalog:hono",
+    "@hono/vite-dev-server": "catalog:hono",
+    "@hono/vite-ssg": "catalog:hono",
+    "@tailwindcss/vite": "catalog:web-tailwind",
     "@levicape/hall-gate-io": "workspace:",
-    "@levicape/paloma": "catalog:",
     "@levicape/spork": "catalog:",
     "@levicape/spork-polly": "catalog:",
     "clsx": "catalog:web-style",
+    "daisyui": "catalog:web-tailwind",
     "effect": "catalog:effect",
     "hono": "catalog:hono",
     "honox": "catalog:hono",
@@ -31,22 +35,17 @@
     "react-router": "catalog:web-react-router",
     "serialize-error": "catalog:error",
     "std-env": "catalog:runtime-env",
+    "tailwindcss": "catalog:web-tailwind",
     "ufo": "catalog:http",
     "verror": "catalog:error",
+    "vite": "catalog:web-vite",
     "vite-plugin-node-csp": "catalog:web-vite"
   },
   "devDependencies": {
     "@biomejs/biome": "catalog:lint",
-    "@hono/vite-build": "catalog:hono",
-    "@hono/vite-dev-server": "catalog:hono",
-    "@hono/vite-ssg": "catalog:hono",
-    "@tailwindcss/vite": "catalog:web-tailwind",
     "@types/node": "catalog:types",
     "@types/react": "catalog:types",
-    "daisyui": "catalog:web-tailwind",
-    "tailwindcss": "catalog:web-tailwind",
-    "typescript": "catalog:dev",
-    "vite": "catalog:web-vite"
+    "typescript": "catalog:dev"
   },
   "engines": {
     "node": "22"
